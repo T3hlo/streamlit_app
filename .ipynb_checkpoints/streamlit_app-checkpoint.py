@@ -48,48 +48,55 @@ with st.echo(code_location='below'):
 '''
 This is a  suplot.
 '''
-
-            
-col1, col2 = st.beta_columns(2)
-
-
-
-
-with col1:
-    
-    x = np.arange(100)
-    source = pd.DataFrame({
+x = np.arange(100)
+source = pd.DataFrame({
       'x': x,
       'f(x)': np.sin(x / 5)
     })
 
 
 
-    st.altair_chart(alt.Chart(source).mark_line().encode(
+# right panel: histogram
+sine = alt.Chart(source).mark_line().encode(
     x='x',
-    y='f(x)'))
+    y='f(x)')
 
 
-    
 
-with col2:
-
-        # Compute x^2 + y^2 across a 2D grid
-        x, y = np.meshgrid(range(-5, 5), range(-5, 5))
-        z = x ** 2 + y ** 2
+# Compute x^2 + y^2 across a 2D grid
+x, y = np.meshgrid(range(-5, 5), range(-5, 5))
+z = x ** 2 + y ** 2
 
         # Convert this grid to columnar data expected by Altair
-        source = pd.DataFrame({'x': x.ravel(),
+source = pd.DataFrame({'x': x.ravel(),
                              'y': y.ravel(),
                              'z': z.ravel()})
 
-        st.altair_chart(alt.Chart(source).mark_rect().encode(
+heat alt.Chart(source).mark_rect().encode(
         x='x:O',
         y='y:O',
         color='z:Q'
     )              
 
-      )
+      
+
+# build the chart:
+st.altair_chart(alt.hconcat(
+    sine,
+heat,
+)
+)
+               
+
+
+
+
+
+
+
+
+
+
         
 
 
