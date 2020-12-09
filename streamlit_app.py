@@ -65,7 +65,7 @@ with col1:
 
 
 
-    st.altair_chart(alt.Chart(source).mark_line().encode(
+    st.altair_chart(alt.Chart(source).mark_line().mark_rect().encode(
     x='x',
     y='f(x)'))
 
