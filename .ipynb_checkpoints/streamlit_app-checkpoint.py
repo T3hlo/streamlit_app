@@ -17,42 +17,61 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+st.markdown(
+    _(
+        """
+        This is a test interatcive plot:
+    """
+    )
+)
 
+
+with st.echo(code_location='below'):
+    
+        with col1:
+            
+            total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
+            num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
+
+            Point = namedtuple('Point', 'x y')
+            data = []
+
+                  # Compute x^2 + y^2 across a 2D grid
+            x, y = np.meshgrid(range(-5, 5), range(-5, 5))
+            z = x ** 2 + y ** 2
+
+            # Convert this grid to columnar data expected by Altair
+            source = pd.DataFrame({'x': x.ravel(),
+                                 'y': y.ravel(),
+                                 'z': z.ravel()})
+
+            st.altair_chart(alt.Chart(source).mark_rect().encode(
+            x='x:O',
+            y='y:O',
+            color='z:Q'
+        ), 
+
+                            alt.Chart(source).mark_rect().encode(
+            x='x:O',
+            y='y:O',
+            color='z:Q'
+        )
+
+                )
+
+
+st.markdown(
+    _(
+        """
+        This is a test supbplot type graphic:
+    """
+    )
+)
+
+            
 col1, col2 = st.beta_columns(2)
 
 
-# with st.echo(code_location='below'):
-    
-#         with col1:
-            
-#             total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-#             num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
-
-#             Point = namedtuple('Point', 'x y')
-#             data = []
-
-#                   # Compute x^2 + y^2 across a 2D grid
-#             x, y = np.meshgrid(range(-5, 5), range(-5, 5))
-#             z = x ** 2 + y ** 2
-
-#             # Convert this grid to columnar data expected by Altair
-#             source = pd.DataFrame({'x': x.ravel(),
-#                                  'y': y.ravel(),
-#                                  'z': z.ravel()})
-
-#             st.altair_chart(alt.Chart(source).mark_rect().encode(
-#             x='x:O',
-#             y='y:O',
-#             color='z:Q'
-#         ), 
-
-#                             alt.Chart(source).mark_rect().encode(
-#             x='x:O',
-#             y='y:O',
-#             color='z:Q'
-#         )
-
-#                 )
 
 
 with col1:
@@ -67,7 +86,7 @@ with col1:
 
     st.altair_chart(alt.Chart(source).mark_line().encode(
     x='x',
-    y='f(x)')).interactive()
+    y='f(x)'))
 
 
     
@@ -90,7 +109,76 @@ with col2:
     )              
 
       )
+        
 
+
+st.markdown(
+    _(
+        """
+        This is a test supbplot type graphic:
+    """
+    )
+)
+
+
+
+x = np.random.normal(size=100)
+y = np.random.normal(size=100)
+
+m = np.random.normal(15, 1, size=100)
+
+source = pd.DataFrame({"x": x, "y":y, "m":m})
+
+
+
+# interval selection in the scatter plot
+pts = alt.selection(type="interval", encodings=["x"])
+
+# left panel: scatter plot
+points = alt.Chart().mark_point(filled=True, color="black").encode(
+    x='x',
+    y='y'
+).transform_filter(
+    pts
+).properties(
+    width=300,
+    height=300
+)
+
+# right panel: histogram
+mag = alt.Chart().mark_bar().encode(
+    x='mbin:N',
+    y="count()",
+    color=alt.condition(pts, alt.value("black"), alt.value("lightgray"))
+).properties(
+    width=300,
+    height=300
+).add_selection(pts)
+
+# build the chart:
+alt.hconcat(
+    points,
+    mag,
+    data=source
+).transform_bin(
+    "mbin",
+    field="m",
+    bin=alt.Bin(maxbins=20)
+)
+
+
+
+
+col1, col2, = st.beta_columns()
+
+with col1:
+    st.header("A cat")
     
+    st.altair_chart(mag)              
 
-
+      
+        
+    
+with col1:
+    st.header("A cat")
+    st.altair_chart(points)
