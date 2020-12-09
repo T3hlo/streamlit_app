@@ -17,11 +17,13 @@ forums](https://discuss.streamlit.io).
 In the meantime, below is an example of what you can do with just a few lines of code:
 """
 
+
 st.markdown(
     _(
-        """
-        This is a test interatcive plot:
-    """
+        "All the data displayed in this dashboard is provided by the Italian Ministry of Health "
+        "(Ministero della Salute) and elaborated by Dipartimento della Protezione Civile. This work is therefore "
+        "a derivative of [COVID-19 Italia - Monitoraggio situazione](https://github.com/pcm-dpc/COVID-19) licensed "
+        "under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)"
     )
 )
 
