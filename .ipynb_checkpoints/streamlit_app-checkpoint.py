@@ -18,15 +18,11 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 
 
-st.markdown(
-    _(
-        "All the data displayed in this dashboard is provided by the Italian Ministry of Health "
-        "(Ministero della Salute) and elaborated by Dipartimento della Protezione Civile. This work is therefore "
-        "a derivative of [COVID-19 Italia - Monitoraggio situazione](https://github.com/pcm-dpc/COVID-19) licensed "
-        "under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)"
-    )
-)
+'''
+# This is the document title
 
+This is some _markdown_.
+'''
 
 with st.echo(code_location='below'):
     
@@ -61,14 +57,9 @@ with st.echo(code_location='below'):
 
                 )
 
-
-st.markdown(
-    _(
-        """
-        This is a test supbplot type graphic:
-    """
-    )
-)
+'''
+This is an interatcive plot.
+'''
 
             
 col1, col2 = st.beta_columns(2)
@@ -114,13 +105,9 @@ with col2:
         
 
 
-st.markdown(
-    _(
-        """
-        This is a test supbplot type graphic:
-    """
-    )
-)
+'''
+This is asupbplot
+'''
 
 
 
@@ -169,6 +156,9 @@ alt.hconcat(
 )
 
 
+'''
+This is another subplot example
+'''
 
 
 col1, col2, = st.beta_columns()
