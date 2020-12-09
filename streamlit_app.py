@@ -17,29 +17,65 @@ In the meantime, below is an example of what you can do with just a few lines of
 """
 
 
-with st.echo(code_location='below'):
-    total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
-    num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
+col1, col2 = st.beta_columns(2)
 
-    Point = namedtuple('Point', 'x y')
-    data = []
 
-          # Compute x^2 + y^2 across a 2D grid
-    x, y = np.meshgrid(range(-5, 5), range(-5, 5))
-    z = x ** 2 + y ** 2
+with col1:
+    st.echo(code_location='below'):
+        total_points = st.slider("Number of points in spiral", 1, 5000, 2000)
+        num_turns = st.slider("Number of turns in spiral", 1, 100, 9)
 
-    # Convert this grid to columnar data expected by Altair
-    source = pd.DataFrame({'x': x.ravel(),
-                         'y': y.ravel(),
-                         'z': z.ravel()})
+        Point = namedtuple('Point', 'x y')
+        data = []
 
-    st.altair_chart(alt.Chart(source).mark_rect().encode(
-    x='x:O',
-    y='y:O',
-    color='z:Q'
-)
-        
-        )
+              # Compute x^2 + y^2 across a 2D grid
+        x, y = np.meshgrid(range(-5, 5), range(-5, 5))
+        z = x ** 2 + y ** 2
+
+        # Convert this grid to columnar data expected by Altair
+        source = pd.DataFrame({'x': x.ravel(),
+                             'y': y.ravel(),
+                             'z': z.ravel()})
+
+        st.altair_chart(alt.Chart(source).mark_rect().encode(
+        x='x:O',
+        y='y:O',
+        color='z:Q'
+    ), 
+
+                        alt.Chart(source).mark_rect().encode(
+        x='x:O',
+        y='y:O',
+        color='z:Q'
+    )
+
+            )
+
+
+
+
+
+with col2:
+
+    st.echo(code_location='below'):
+
+
+        # Compute x^2 + y^2 across a 2D grid
+        x, y = np.meshgrid(range(-5, 5), range(-5, 5))
+        z = x ** 2 + y ** 2
+
+        # Convert this grid to columnar data expected by Altair
+        source = pd.DataFrame({'x': x.ravel(),
+                             'y': y.ravel(),
+                             'z': z.ravel()})
+
+        st.altair_chart(alt.Chart(source).mark_rect().encode(
+        x='x:O',
+        y='y:O',
+        color='z:Q'
+    )              
+
+      )
 
     
 
