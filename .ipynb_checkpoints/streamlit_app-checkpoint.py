@@ -4,7 +4,6 @@ import math
 import numpy as np
 import pandas as pd
 import streamlit as st
-from vega_datasets import data
 
 
 """
@@ -57,17 +56,21 @@ col1, col2 = st.beta_columns(2)
 
 
 with col1:
-
-    source = data.cars()
-
-    st.altair_chart(alt.Chart(source).mark_circle(size=60).encode(
-        x='Horsepower',
-        y='Miles_per_Gallon',
-        color='Origin',
-        tooltip=['Name', 'Origin', 'Horsepower', 'Miles_per_Gallon']
-    ).interactive())
+    
+    x = np.arange(100)
+    source = pd.DataFrame({
+      'x': x,
+      'f(x)': np.sin(x / 5)
+    })
 
 
+
+    st.altair_chart(alt.Chart(source).mark_line().encode(
+    x='x',
+    y='f(x)').interactive())
+
+
+    
 
 with col2:
 
