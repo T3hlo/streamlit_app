@@ -51,7 +51,7 @@ col1, col2 = st.beta_columns(2)
 #             color='z:Q'
 #         )
 
-                )
+#                 )
 
 
 
