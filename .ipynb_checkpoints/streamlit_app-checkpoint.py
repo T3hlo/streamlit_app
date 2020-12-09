@@ -72,7 +72,7 @@ source = pd.DataFrame({'x': x.ravel(),
                              'y': y.ravel(),
                              'z': z.ravel()})
 
-heat alt.Chart(source).mark_rect().encode(
+heat = alt.Chart(source).mark_rect().encode(
         x='x:O',
         y='y:O',
         color='z:Q'
