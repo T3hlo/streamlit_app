@@ -46,7 +46,7 @@ with st.echo(code_location='below'):
         .encode(x='x:Q', y='y:Q'))
 
 '''
-This is an interatcive plot.
+This is a  suplot.
 '''
 
             
@@ -65,7 +65,7 @@ with col1:
 
 
 
-    st.altair_chart(alt.Chart(source).mark_line().mark_rect().encode(
+    st.altair_chart(alt.Chart(source).mark_line().encode(
     x='x',
     y='f(x)'))
 
@@ -93,10 +93,10 @@ with col2:
         
 
 
-'''
-This is asupbplot
-'''
 
+'''
+This is another subplot example
+'''
 
 
 x = np.random.normal(size=100)
@@ -133,7 +133,7 @@ mag = alt.Chart().mark_bar().encode(
 ).add_selection(pts)
 
 # build the chart:
-alt.hconcat(
+st.altair_chart(alt.hconcat(
     points,
     mag,
     data=source
@@ -142,23 +142,8 @@ alt.hconcat(
     field="m",
     bin=alt.Bin(maxbins=20)
 )
+               )
 
 
-'''
-This is another subplot example
-'''
 
 
-col1, col2, = st.beta_columns()
-
-with col1:
-    st.header("A cat")
-    
-    st.altair_chart(mag)              
-
-      
-        
-    
-with col1:
-    st.header("A cat")
-    st.altair_chart(points)
