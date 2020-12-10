@@ -19,6 +19,15 @@ In the meantime, below is an example of what you can do with just a few lines of
 
 
 '''
+First actual data
+'''
+chart_data = pd.read_csv('AVPU.csv')
+
+
+st.line_chart(chart_data)
+
+
+'''
 # This is the document title
 
 This is some _markdown_.
