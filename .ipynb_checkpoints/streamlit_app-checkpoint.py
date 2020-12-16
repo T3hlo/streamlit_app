@@ -27,7 +27,7 @@ chart_data.date = pd.to_datetime(chart_data.date)
 chart_data = chart_data.set_index('date')
 
 # temp = chart_data['Voice']
-st.line_chart(temp)
+st.line_chart(chart_data)
 
 
 
