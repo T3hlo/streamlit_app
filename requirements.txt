@@ -2,3 +2,5 @@ altair
 pandas
 numpy
 streamlit
+seaborn
+matplotlib

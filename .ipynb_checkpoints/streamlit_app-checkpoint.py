@@ -4,6 +4,7 @@ import math
 import numpy as np
 import pandas as pd
 import streamlit as st
+import matplotlib.pyplot as plt
 
 
 """
@@ -21,10 +22,12 @@ In the meantime, below is an example of what you can do with just a few lines of
 '''
 First actual data
 '''
-chart_data = pd.read_csv('AVPU.csv', index_col=0)
+chart_data = pd.read_csv('AVPU.csv')
+chart_data.date = pd.to_datetime(chart_data.date)
+chart_data = chart_data.set_index('date')
 
 temp = chart_data['Alert']
-st.line_chart(temp)
+st.(temp)
 
 
 '''
