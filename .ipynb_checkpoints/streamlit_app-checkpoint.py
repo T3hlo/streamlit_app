@@ -23,9 +23,8 @@ First actual data
 '''
 chart_data = pd.read_csv('AVPU.csv', index_col=0)
 
-st.dataframe(chart_data) 
-
-st.line_chart(chart_data)
+temp = chart_data['Alert']
+st.line_chart(temp)
 
 
 '''
