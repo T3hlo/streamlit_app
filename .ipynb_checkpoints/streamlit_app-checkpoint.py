@@ -27,7 +27,8 @@ chart_data.date = pd.to_datetime(chart_data.date)
 chart_data = chart_data.set_index('date')
 
 temp = chart_data['Alert']
-st.lineplot(temp)
+
+st.line_chart(temp)
 
 
 '''
