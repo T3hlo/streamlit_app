@@ -30,21 +30,17 @@ chart_data = chart_data.set_index('date')
 # st.line_chart(temp)
 
 
-source = alt.sequence(start=0, stop=12.7, step=0.1, as_='x')
+import altair as alt
+from vega_datasets import data
 
-st.dataframe(source)
+source = data.stocks()
 
-alt.Chart(source).mark_line().transform_calculate(
-    sin='sin(datum.x)',
-    cos='cos(datum.x)'
-).transform_fold(
-    ['sin', 'cos']
-).encode(
-    x='x:Q',
-    y='value:Q',
-    color='key:N'
+alt.Chart(source).mark_line().encode(
+    x='date',
+    y='price',
+    color='symbol',
+    strokeDash='symbol',
 )
-
 
 '''
 # This is the document title
