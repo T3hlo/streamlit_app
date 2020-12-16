@@ -31,7 +31,6 @@ chart_data = chart_data.set_index('date')
 
 
 import altair as alt
-from vega_datasets import data
 
 source = data.stocks()
 
