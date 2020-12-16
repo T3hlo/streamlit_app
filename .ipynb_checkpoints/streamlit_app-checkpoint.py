@@ -26,8 +26,24 @@ chart_data = pd.read_csv('AVPU.csv')
 chart_data.date = pd.to_datetime(chart_data.date)
 chart_data = chart_data.set_index('date')
 
-temp = chart_data['Voice']
-st.line_chart(temp)
+# temp = chart_data['Voice']
+# st.line_chart(temp)
+
+
+source = alt.sequence(start=0, stop=12.7, step=0.1, as_='x')
+
+st.dataframe(source)
+
+alt.Chart(source).mark_line().transform_calculate(
+    sin='sin(datum.x)',
+    cos='cos(datum.x)'
+).transform_fold(
+    ['sin', 'cos']
+).encode(
+    x='x:Q',
+    y='value:Q',
+    color='key:N'
+)
 
 
 '''
