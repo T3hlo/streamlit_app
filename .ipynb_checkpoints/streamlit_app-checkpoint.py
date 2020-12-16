@@ -27,20 +27,9 @@ chart_data.date = pd.to_datetime(chart_data.date)
 chart_data = chart_data.set_index('date')
 
 # temp = chart_data['Voice']
-# st.line_chart(temp)
+st.line_chart(temp)
 
 
-import altair as alt
-from vega_datasets import data
-
-source = data.stocks()
-
-alt.Chart(source).mark_line().encode(
-    x='date',
-    y='price',
-    color='symbol',
-    strokeDash='symbol',
-)
 
 '''
 # This is the document title
